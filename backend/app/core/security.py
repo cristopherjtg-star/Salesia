@@ -8,14 +8,21 @@ from app.core.config import settings
 pw_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
+def _truncate_password(password: str) -> str:
+    """Trunca la contraseña a un máximo de 72 bytes para evitar el error de límite de bcrypt."""
+    return password.encode("utf-8")[:72].decode("utf-8", errors="ignore")
+
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica si la contraseña ingresada coincide con el hash almacenado."""
-    return pw_context.verify(plain_password, hashed_password)
+    safe_password = _truncate_password(plain_password)
+    return pw_context.verify(safe_password, hashed_password)
 
 
 def get_password_hash(password: str) -> str:
     """Genera el hash Bcrypt de una contraseña en texto plano."""
-    return pw_context.hash(password)
+    safe_password = _truncate_password(password)
+    return pw_context.hash(safe_password)
 
 
 def create_access_token(data: dict) -> str:
