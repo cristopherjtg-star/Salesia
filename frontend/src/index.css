@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-salesia-dark: #0F172A;
+  --color-salesia-card: #1E293B;
+  --color-salesia-primary: #0284C7;
+  --color-salesia-cyan: #06B6D4;
+  --color-salesia-accent: #38BDF8;
+}
