@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { customerService, type Customer } from '../../services/customerService';
 import { PeruMap } from '../../components/PeruMap';
-import { Users, UserPlus, Mail, Phone, CreditCard, MapPin } from 'lucide-react';
+import { Users, UserPlus, CreditCard, MapPin } from 'lucide-react';
 
 const PERU_DEPARTMENTS = [
   'Amazonas', 'Ancash', 'Apurímac', 'Arequipa', 'Ayacucho', 'Cajamarca',
