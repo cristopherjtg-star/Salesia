@@ -11,16 +11,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configuración de dominios autorizados para CORS
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://salesia-rgqhdxrwc-cristopherjtg-star.vercel.app",  # Tu frontend en Vercel
-]
-
+# Configuración amplia para permitir cualquier despliegue de Vercel y local
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # También puedes usar ["*"] durante pruebas
+    allow_origins=["*"],  # Permite cualquier origen (resuelve el cambio de URLs en Vercel)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
