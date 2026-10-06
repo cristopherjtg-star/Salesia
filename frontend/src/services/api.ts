@@ -1,7 +1,7 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 
-// Si tu backend en FastAPI usa prefijo como /api o /api/v1, puedes incluirlo al final de la URL
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com';
+// Agregamos /api/v1 a la URL base
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor para adjuntar automáticamente el token JWT en las peticiones
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('token');
