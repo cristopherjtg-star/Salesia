@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { userService, type User } from '../../services/userService';
-import { ShieldCheck, UserPlus, Users, UserCheck, Mail, IdCard, Lock, ShieldAlert } from 'lucide-react';
+import { ShieldCheck, UserPlus, Users, UserCheck } from 'lucide-react';
 
 export default function UserPage() {
   const [users, setUsers] = useState<User[]>([]);
