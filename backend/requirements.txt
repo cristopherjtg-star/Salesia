@@ -10,5 +10,6 @@ passlib[bcrypt]>=1.7.4
 python-jose[cryptography]>=3.3.0
 python-multipart>=0.0.9
 numpy>=1.26.4
+pandas>=2.2.0
 scipy>=1.12.0
 alembic>=1.13.1
