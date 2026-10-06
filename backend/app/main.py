@@ -11,19 +11,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configuración explícita y robusta de CORS
+# Permite orígenes locales y cualquier subdominio de vercel.app
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
-        "https://salesia-975boy15j-cristopherjtg-star.vercel.app",  # Tu URL actual de Vercel
+        "https://salesia.vercel.app",  # Tu dominio principal de producción en Vercel
     ],
-    allow_origin_regex=r"https://.*salesia.*\.vercel\.app",  # Cualquier subdominio de SalesIA en Vercel
+    allow_origin_regex=r"https://.*\.vercel\.app",  # Coincide con cualquier URL preview de Vercel
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
 )
 
 # Manejador global de excepciones
