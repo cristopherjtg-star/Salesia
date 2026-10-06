@@ -11,10 +11,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configuración amplia para permitir cualquier despliegue de Vercel y local
+# Permite localhost y cualquier subdominio de Vercel (*.vercel.app) de forma dinámica
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite cualquier origen (resuelve el cambio de URLs en Vercel)
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",  # Permite cualquier despliegue en Vercel
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
