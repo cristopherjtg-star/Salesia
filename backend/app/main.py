@@ -11,34 +11,31 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configuración de orígenes permitidos para CORS
+# Configuración de dominios autorizados para CORS
 origins = [
-    "http://localhost:5173",  # Vite local
+    "http://localhost:5173",
     "http://localhost:3000",
-    "https://salesia.vercel.app",  # Reemplaza con tu dominio exacto de Vercel si es diferente
-    "*"  # Permite cualquier origen (util para evitar bloqueos durante pruebas)
+    "https://salesia-rgqhdxrwc-cristopherjtg-star.vercel.app",  # Tu frontend en Vercel
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins,  # También puedes usar ["*"] durante pruebas
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
 )
 
-# Manejador global de excepciones de negocio
+# Manejador global de excepciones
 app.add_exception_handler(BusinessLogicException, business_exception_handler)
 
-# Registrar el router principal de la versión 1 (Ej: /api/v1)
+# Registrar el router principal
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-@app.get("/", tags=["Health Check"])
+@app.get("/")
 def root():
     return {
         "status": "online",
         "project": settings.PROJECT_NAME,
-        "api_v1_prefix": settings.API_V1_STR,
         "docs": "/docs"
     }
