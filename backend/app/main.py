@@ -17,7 +17,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
-        "https://salesia.vercel.app",  # Tu dominio principal de producción en Vercel
+        "https://salesia.vercel.app",
+        "https://salesia-nine.vercel.app",  # <--- Agrega tu dominio exacto de Vercel aquí
     ],
     allow_origin_regex=r"https://.*\.vercel\.app",  # Coincide con cualquier URL preview de Vercel
     allow_credentials=True,
