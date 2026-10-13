@@ -1,8 +1,7 @@
-from sqlalchemy import Column, Integer, String, Numeric, Boolean, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Numeric, Boolean, ForeignKey, DateTime, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
-from app.models.category import Category  # Importamos Category desde su propio archivo
 
 class Product(Base):
     __tablename__ = "products"
@@ -10,16 +9,15 @@ class Product(Base):
     id = Column(Integer, primary_key=True, index=True)
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
-    sku = Column(String(50), unique=True, index=True, nullable=False)
-    name = Column(String(150), nullable=False)
-    description = Column(String(255), nullable=True)
-    unit_price = Column(Numeric(10, 2), nullable=False)
-    cost_price = Column(Numeric(10, 2), nullable=False)
+    sku = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    description = Column(Text, nullable=True)
+    unit_price = Column(Numeric, nullable=False)
+    cost_price = Column(Numeric, nullable=False)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    # Relación con Category
+    # Relaciones
+    company = relationship("Company")
     category = relationship("Category", back_populates="products")
-    
-    # Relación con Inventory
     inventory = relationship("Inventory", back_populates="product", uselist=False)

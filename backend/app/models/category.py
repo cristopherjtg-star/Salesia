@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
@@ -6,9 +6,10 @@ class Category(Base):
     __tablename__ = "categories"
 
     id = Column(Integer, primary_key=True, index=True)
-    company_id = Column(Integer, nullable=False, index=True)
-    name = Column(String(100), nullable=False)
-    description = Column(String(255), nullable=True)
+    company_id = Column(Integer, ForeignKey("companies.id"), nullable=False, index=True)
+    name = Column(String, nullable=False)
+    description = Column(Text, nullable=True)
 
-    # Relación inversa requerida por Product
+    # Relaciones
+    company = relationship("Company")
     products = relationship("Product", back_populates="category")
