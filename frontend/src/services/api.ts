@@ -1,8 +1,9 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1';
+
 const api = axios.create({
-  // Asegúrate de que termine en .com/api/v1 (NO .s)
-  baseURL: import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
