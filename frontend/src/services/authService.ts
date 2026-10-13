@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-// Detecta automáticamente la URL del backend (usando variable de entorno o la URL directa de Render)
-const API_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1';
+import api from './api'; // Importa tu instancia centralizada
 
 export interface LoginCredentials {
   dni: string;
@@ -21,9 +18,9 @@ export interface AuthResponse {
 export const authService = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
-      const response = await axios.post<AuthResponse>(`${API_URL}/auth/login`, credentials);
+      // Usa 'api' en lugar de 'axios' para aprovechar la baseURL y los interceptores
+      const response = await api.post<AuthResponse>('auth/login', credentials);
       
-      // Opcional pero recomendado: guardar el token automáticamente en el almacenamiento local
       if (response.data.access_token) {
         localStorage.setItem('token', response.data.access_token);
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -31,7 +28,6 @@ export const authService = {
 
       return response.data;
     } catch (error: any) {
-      // Extrae el mensaje de error personalizado del backend si existe (ej. "DNI o contraseña incorrectos")
       const message = error.response?.data?.detail || 'Error al iniciar sesión con el servidor.';
       throw new Error(message);
     }
