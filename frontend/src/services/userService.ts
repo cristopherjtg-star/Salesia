@@ -26,7 +26,7 @@ export interface UserCreatePayload {
 export const userService = {
   // Obtener lista de usuarios
   getUsers: async (): Promise<User[]> => {
-    const response = await api.get('/users/');
+    const response = await api.get('users/');
     return response.data;
   },
 

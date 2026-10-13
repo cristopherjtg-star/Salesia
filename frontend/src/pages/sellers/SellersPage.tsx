@@ -40,7 +40,7 @@ export const SellersPage: React.FC = () => {
 
   const loadUsers = async () => {
     try {
-      const response = await api.get('/users');
+      const response = await api.get('users');
       if (response && response.data) {
         setUsersList(response.data);
       }

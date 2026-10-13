@@ -12,7 +12,7 @@ export interface Insight {
 
 export const insightService = {
   getInsights: async (): Promise<Insight[]> => {
-    const response = await api.get('/insights/');
+    const response = await api.get('insights/');
     return response.data;
   },
 };

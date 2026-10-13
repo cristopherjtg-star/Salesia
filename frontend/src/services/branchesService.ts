@@ -12,7 +12,7 @@ export interface Warehouse {
 export const warehousesService = {
   // 1. Obtener la lista de almacenes / sedes
   async getAll() {
-    const response = await api.get('/branches');
+    const response = await api.get('branches');
     return response.data;
   },
 

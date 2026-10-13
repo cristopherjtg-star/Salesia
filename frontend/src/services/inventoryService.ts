@@ -24,7 +24,7 @@ export interface KardexMovement {
 
 export const inventoryService = {
   getInventory: async (warehouseId: number = 1): Promise<InventoryItem[]> => {
-    const response = await api.get('/products/', {
+    const response = await api.get('products/', {
       params: { warehouse_id: warehouseId }
     });
 
@@ -58,7 +58,7 @@ export const inventoryService = {
 
   // CORREGIDO: Enviamos product_id para coincidir con la firma del Backend
   getKardex: async (productId: number, warehouseId: number): Promise<KardexMovement[]> => {
-    const response = await api.get('/inventory/movements', {
+    const response = await api.get('inventory/movements', {
       params: { product_id: productId, warehouse_id: warehouseId }
     });
     return Array.isArray(response.data) ? response.data : response.data.items || response.data.data || [];

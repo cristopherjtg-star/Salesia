@@ -12,7 +12,7 @@ export interface Employee {
 export const sellersService = {
   // Obtener la lista de empleados / personal
   async getAll() {
-    const response = await api.get('/employees');
+    const response = await api.get('employees');
     return response.data;
   },
 

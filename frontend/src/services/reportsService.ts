@@ -13,7 +13,7 @@ export interface Report {
 
 export const reportsService = {
   async getAll() {
-    const response = await api.get('/reports');
+    const response = await api.get('reports');
     return response.data;
   },
 

@@ -41,7 +41,7 @@ export default function InventoryPage() {
   // 1. Cargar lista de almacenes
   const loadWarehouses = async () => {
     try {
-      const response = await api.get('/warehouses/');
+      const response = await api.get('warehouses/');
       const list = Array.isArray(response.data) ? response.data : response.data.data;
       if (Array.isArray(list) && list.length > 0) {
         setWarehouses(list);

@@ -12,7 +12,7 @@ export interface Customer {
 
 export const customerService = {
   getCustomers: async (): Promise<Customer[]> => {
-    const response = await api.get('/customers/');
+    const response = await api.get('customers/');
     const data = response.data;
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.items)) return data.items;

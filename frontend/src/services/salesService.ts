@@ -29,7 +29,7 @@ export const saleService = {
 
   // Obtener lista de clientes para asignar al ticket
   getCustomers: async () => {
-    const response = await api.get('/customers/');
+    const response = await api.get('customers/');
     return response.data;
   }
 };
