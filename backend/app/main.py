@@ -1,5 +1,5 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import Response
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.v1.routers import api_router
 from app.core.exceptions import BusinessLogicException, business_exception_handler
@@ -10,26 +10,20 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Middleware personalizado para manejar CORS dinámicamente para cualquier frontend (Vercel previews y Localhost)
-@app.middleware("http")
-async def cors_middleware(request: Request, call_next):
-    # Si es una petición OPTIONS (preflight de CORS), respondemos de inmediato con éxito
-    if request.method == "OPTIONS":
-        response = Response(status_code=200)
-    else:
-        response = await call_next(request)
-    
-    origin = request.headers.get("origin")
-    if origin:
-        response.headers["Access-Control-Allow-Origin"] = origin
-    else:
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
-    
-    return response
+# Configuración de CORS robusta para aceptar localhost y CUALQUIER subdominio de Vercel
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://salesia.vercel.app",
+        "https://salesia-nine.vercel.app",
+    ],
+    allow_origin_regex=r"https://([a-zA-Z0-9_-]+)-cristopherjtg-star\.vercel\.app|https://.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Manejador global de excepciones
 app.add_exception_handler(BusinessLogicException, business_exception_handler)
