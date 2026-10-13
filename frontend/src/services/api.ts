@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Asegúrate de que incluya /api/v1 al final si usa la ruta por defecto
 const API_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1';
 
 const api = axios.create({
@@ -9,21 +10,16 @@ const api = axios.create({
   },
 });
 
-// Interceptor para incluir el Token JWT en todas las peticiones
+// Interceptor para el token JWT
 api.interceptors.request.use(
   (config) => {
-    // Recupera el token guardado en el navegador tras hacer login
-    const token = localStorage.getItem('token') || localStorage.getItem('access_token');
-    
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default api;
