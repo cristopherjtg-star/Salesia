@@ -18,8 +18,8 @@ import { AuditPage } from './pages/audit/AuditPage';
 
 // Importar ProductsPage como export default
 import ProductsPage from './pages/products/ProductsPage'; 
-import { ReportsPage } from './pages/reports/reportsPage';
-import { SellersPage } from './pages/sellers/sellersPage';
+import { ReportsPage } from './pages/reports/ReportsPage';
+import { SellersPage } from './pages/sellers/SellersPage';
 import { BranchesPage } from './pages/branches/BranchesPage';
 
 function Layout() {
