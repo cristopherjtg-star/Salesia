@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/layout/Header';
 import ReportModal from '../../components/common/ReportModal';
 import { 
   TrendingUp, 
   DollarSign, 
   ShoppingBag, 
-  Package, 
   Activity, 
   AlertCircle,
   BarChart3,

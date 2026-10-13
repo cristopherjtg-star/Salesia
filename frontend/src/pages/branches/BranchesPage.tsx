@@ -6,8 +6,7 @@ import {
   Edit3, 
   Power, 
   MapPin, 
-  CheckCircle, 
-  AlertCircle 
+  CheckCircle
 } from 'lucide-react';
 import { warehousesService } from '../../services/branchesService'; // Ajusta la ruta a tu servicio
 
