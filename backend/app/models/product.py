@@ -2,14 +2,7 @@ from sqlalchemy import Column, Integer, String, Numeric, Boolean, ForeignKey, Da
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
-
-class Category(Base):
-    __tablename__ = "categories"
-
-    id = Column(Integer, primary_key=True, index=True)
-    company_id = Column(Integer, ForeignKey("companies.id"), nullable=False)
-    name = Column(String(100), unique=True, nullable=False)
-    description = Column(String(255), nullable=True)
+from app.models.category import Category  # Importamos Category desde su propio archivo
 
 class Product(Base):
     __tablename__ = "products"
@@ -25,6 +18,8 @@ class Product(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    category = relationship("Category")
-    # RELACIÓN VINCULADA CON INVENTORY:
+    # Relación con Category
+    category = relationship("Category", back_populates="products")
+    
+    # Relación con Inventory
     inventory = relationship("Inventory", back_populates="product", uselist=False)
