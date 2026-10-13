@@ -9,4 +9,21 @@ const api = axios.create({
   },
 });
 
+// Interceptor para incluir el Token JWT en todas las peticiones
+api.interceptors.request.use(
+  (config) => {
+    // Recupera el token guardado en el navegador tras hacer login
+    const token = localStorage.getItem('token') || localStorage.getItem('access_token');
+    
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export default api;
