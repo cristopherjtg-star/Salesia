@@ -1,0 +1,27 @@
+# --- Variables de entorno y secretos ---
+backend/.env
+.env
+*.env
+
+# --- Entornos virtuales de Python ---
+venv/
+env/
+.env/
+.venv/
+
+# --- Caché de Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# --- Configuraciones de editores e IDEs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs y archivos temporales ---
+*.log
+npm-debug.log*

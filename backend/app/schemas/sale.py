@@ -1,0 +1,49 @@
+from pydantic import BaseModel, Field
+from datetime import datetime
+
+class SaleItemSchema(BaseModel):
+    product_id: int
+    quantity: int = Field(..., gt=0)
+
+class SaleCreateSchema(BaseModel):
+    company_id: int
+    customer_id: int
+    sale_code: str | None = Field(None, max_length=50)  # Opcional, se autogenera si viene None
+    items: list[SaleItemSchema]
+    payment_method: str = "EFECTIVO"
+
+class SaleDetailResponse(BaseModel):
+    id: int
+    product_id: int
+    quantity: int
+    unit_price: float
+    total_price: float
+
+    class Config:
+        from_attributes = True
+
+class PaymentResponse(BaseModel):
+    id: int
+    payment_method: str
+    amount: float
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class SaleResponse(BaseModel):
+    id: int
+    company_id: int
+    customer_id: int
+    seller_id: int
+    sale_code: str
+    subtotal: float
+    tax: float
+    total: float
+    status: str
+    created_at: datetime
+    details: list[SaleDetailResponse] = []
+    payments: list[PaymentResponse] = []  # Deuelve la lista de pagos vinculados
+
+    class Config:
+        from_attributes = True
