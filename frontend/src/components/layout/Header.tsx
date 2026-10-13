@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { RefreshCw, FileText, Moon, Sun, Bell } from 'lucide-react';
 
 interface HeaderProps {
@@ -30,7 +30,7 @@ export default function Header({ onSync, onGenerateReport }: HeaderProps) {
     <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0d131f] text-slate-800 dark:text-white transition-colors duration-200 px-6 flex items-center justify-between shadow-sm">
       {/* Migas de pan */}
       <div className="text-xs text-slate-500 dark:text-slate-400">
-        <span>1. EJECUTIVO</span> / <span className="font-semibold text-slate-900 dark:text-white">DASHBOARD</span>
+        <span>EJECUTIVO</span> / <span className="font-semibold text-slate-900 dark:text-white">DASHBOARD</span>
       </div>
 
       {/* Acciones principales */}

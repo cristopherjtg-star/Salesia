@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { bayesService, type BayesPayload } from '../../services/bayesService';
-import { Target, ArrowRight, ShieldCheck, Sparkles, CheckCircle2, Database, Sliders, Cpu } from 'lucide-react';
+import { Target, ArrowRight, ShieldCheck, Sparkles, Database, Sliders, Cpu } from 'lucide-react';
 
 export const BayesPage: React.FC = () => {
   // Estado para controlar si lee de la BD o es Manual

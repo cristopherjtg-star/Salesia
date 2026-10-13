@@ -1,4 +1,3 @@
-import React from 'react';
 import { X, Download } from 'lucide-react';
 
 interface ReportModalProps {
