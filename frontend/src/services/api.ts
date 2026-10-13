@@ -1,26 +1,20 @@
-import axios, { type InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-// Apunta a localhost por defecto si no existe la variable VITE_API_URL en el .env
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-
+// Configuración centralizada para conectar el Frontend con tu Backend en Render
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+// Interceptor para enviar automáticamente el token de autenticación en cada petición
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token'); // O la llave donde guardes tu token al iniciar sesión
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+  return config;
+});
 
 export default api;
