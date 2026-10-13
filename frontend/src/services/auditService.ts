@@ -11,7 +11,8 @@ export interface AuditLog {
 
 export const auditService = {
   async getLogs(): Promise<AuditLog[]> {
-    const response = await api.get<AuditLog[]>('/audit');
+    // ✅ CORRECTO: Sin la barra inicial para que apunte a /api/v1/audit
+    const response = await api.get<AuditLog[]>('audit');
     return response.data;
   }
 };
