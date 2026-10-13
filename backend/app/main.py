@@ -1,4 +1,3 @@
-# app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
@@ -11,16 +10,19 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Permite orígenes locales y cualquier subdominio de vercel.app
+# Orígenes explícitos permitidos
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://salesia.vercel.app",
+    "https://salesia-nine.vercel.app",
+]
+
+# Middleware de CORS con soporte para comodines y cualquier vista previa de Vercel
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "https://salesia.vercel.app",
-        "https://salesia-nine.vercel.app",  # <--- Agrega tu dominio exacto de Vercel aquí
-    ],
-    allow_origin_regex=r"https://.*\.vercel\.app",  # Coincide con cualquier URL preview de Vercel
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",  # Otorga acceso a CUALQUIER subdominio de vercel.app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
