@@ -1,7 +1,12 @@
 import axios from 'axios';
 
-// Asegúrate de que incluya /api/v1 al final si usa la ruta por defecto
-const API_URL = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com/api/v1';
+// Obtiene la URL base de las variables de entorno de Vite
+const envUrl = import.meta.env.VITE_API_URL || 'https://salesia-1flh.onrender.com';
+
+// Asegura que la URL termine siempre en /api/v1 para evitar errores 404
+const API_URL = envUrl.endsWith('/api/v1') 
+  ? envUrl 
+  : `${envUrl.replace(/\/$/, '')}/api/v1`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -10,7 +15,7 @@ const api = axios.create({
   },
 });
 
-// Interceptor para el token JWT
+// Interceptor para inyectar el token JWT automáticamente
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
